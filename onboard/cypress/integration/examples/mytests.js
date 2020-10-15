@@ -1,11 +1,11 @@
-describe("Test test suite", ()=> {
+describe("Test inputs", ()=> {
   before(()=>{
     cy.visit("")
   }) 
-  afterEach(()=> {
-    cy.get('button').click()
+  beforeEach(()=>{
+    cy.get('button').should("be.disabled")
   })
-  it("Checks name", ()=>{
+  it("Checks name and button", ()=>{
     cy.get('[type="text"]').type("Alice Chang").should("have.value", "Alice Chang")
   })
   it("Checks email", ()=>{
@@ -17,9 +17,11 @@ describe("Test test suite", ()=> {
   it("checks checkbox", ()=> {
     cy.get('[type="checkbox"]').check()
   })
-  it("checks form submit", ()=> {
-    cy.get('form').submit()
-  })  
 })
 
-// lakjdf
+describe("Checks filled in form", ()=> {
+  it("checks form submit and button clickability", ()=> {
+    cy.get('form').submit()
+    cy.get('button').click() 
+  })  
+})
